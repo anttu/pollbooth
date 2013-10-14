@@ -113,7 +113,6 @@ log4j = {
     // external libraries
     error   'org.codehaus.groovy.grails',
             'org.springframework',
-            'org.hibernate',
             'net.sf.ehcache',
             'org.apache',
             'org.grails',
