@@ -4,6 +4,8 @@ import javax.servlet.http.Cookie
 
 class PollController {
 
+    String USER_ID_COOKIE_NAME = "UID"
+
     def pollService
 
     def index() {
@@ -16,11 +18,23 @@ class PollController {
 
     }
 
+    def details() {
+
+        def model =  [ : ]
+
+        model.put "poll" ,  pollService.getPoll(params?.id)
+        model.put "polls" ,  pollService.activePolls
+
+        render( view: "/poll/polldetails", model: model)
+
+    }
+
     def createPoll()  {
 
-        def USER_ID_COOKIE_NAME = "UID"
 
         def model = [ : ]
+
+        log.debug(USER_ID_COOKIE_NAME)
 
         Cookie c = request.cookies.find()
                 { it.name.equals(USER_ID_COOKIE_NAME) } ?:
@@ -30,7 +44,7 @@ class PollController {
         response.addCookie(c)
 
 
-        pollService.createPoll(c.value)
+        pollService.createPoll(c.value, params?.description)
 
         model.put "polls" ,  pollService.activePolls
 

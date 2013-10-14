@@ -95,16 +95,11 @@
 			</ul>
 		</div>
 		<div id="page-body" role="main">
-			<h1>List of active polls</h1>
-			<p>There are currently ${polls?.size()} polls active</p>
+			<h1>Poll details</h1>
 
 			<div id="controller-list" role="navigation">
-				<h2>Create a poll:</h2>
+				<h2>${poll?.description}</h2>
 
-                <g:form name="create" action="createPoll" >
-                    <input type="text" id="desc" name="description" />
-                    <input type="submit" name="submit" value="lähetä"/>
-                </g:form>
 			</div>
 		</div>
 

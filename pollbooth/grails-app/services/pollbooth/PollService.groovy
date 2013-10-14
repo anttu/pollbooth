@@ -12,13 +12,13 @@ class PollService {
 
     }
 
-    def createPoll(String JSESSIONID) {
+    def createPoll(String JSESSIONID, String description) {
 
         log.info("Creating poll for user ${JSESSIONID}")
 
         def poll = new Poll(JESSIONID: JSESSIONID)
 
-        poll.description ="Foobar"
+        poll.description = description
 
 
         poll.save()
@@ -37,6 +37,8 @@ class PollService {
     }
 
     def getPoll(String ID) {
+
+        Poll.read(ID)
 
     }
 
