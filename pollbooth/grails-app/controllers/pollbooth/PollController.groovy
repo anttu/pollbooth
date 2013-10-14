@@ -32,5 +32,9 @@ class PollController {
 
         pollService.createPoll(c.value)
 
+        model.put "polls" ,  pollService.activePolls
+
+        render( view: "/poll/listofpolls", model: model)
+
     }
 }

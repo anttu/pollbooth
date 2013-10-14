@@ -104,7 +104,7 @@
 		</div>
 		<div id="page-body" role="main">
 			<h1>List of active polls</h1>
-			<p>There are currently ${polls} polls active</p>
+			<p>There are currently ${polls?.size()} polls active</p>
 
 			<div id="controller-list" role="navigation">
 				<h2>Available Polls:</h2>

@@ -6,9 +6,9 @@ class PollService {
 
     def /*List<Poll>*/ getActivePolls() {
 
-        return Poll.findAll().count {}
+        //return Poll.findAll().count {}
         //return Poll.count()
-        //return Poll.all();
+        return Poll.findAll()
 
     }
 
@@ -16,7 +16,15 @@ class PollService {
 
         log.info("Creating poll for user ${JSESSIONID}")
 
-        new Poll(JESSIONID: JSESSIONID).save()
+        def poll = new Poll(JESSIONID: JSESSIONID)
+
+        poll.description ="Foobar"
+
+
+        poll.save()
+        poll.validate()
+        return poll
+
 
     }
 
