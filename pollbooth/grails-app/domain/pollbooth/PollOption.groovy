@@ -6,10 +6,10 @@ class PollOption {
 
     }
 
-    /* The poll this option belongs to */
-    Poll poll
+    static belongsTo = [poll: Poll]
+
     /* Possible answer for the poll */
-    String PollOption
+    String pollOption
 
 
 }

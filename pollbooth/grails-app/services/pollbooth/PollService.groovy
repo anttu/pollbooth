@@ -4,10 +4,8 @@ class PollService {
 
     //private static transactional = false
 
-    def /*List<Poll>*/ getActivePolls() {
+    def List<Poll> getActivePolls() {
 
-        //return Poll.findAll().count {}
-        //return Poll.count()
         return Poll.findAll()
 
     }
@@ -16,13 +14,10 @@ class PollService {
 
         log.info("Creating poll for user ${JSESSIONID}")
 
-        def poll = new Poll(JESSIONID: JSESSIONID)
-
-        poll.description = description
-
+        def poll = new Poll(JESSIONID: JSESSIONID, description: description )
 
         poll.save()
-        poll.validate()
+
         return poll
 
 
@@ -30,13 +25,21 @@ class PollService {
 
     def addOption(String ID, String option) {
 
+        def poll = Poll.get(ID)
+
+        /* TODO Check for duplicate options */
+        poll.addToOptions(new PollOption(pollOption: option))
+
+        poll.save(failOnError: true, flush: true)
+
     }
 
     def addDescription(String ID, String description) {
 
     }
 
-    def getPoll(String ID) {
+    /* Get (read-only) Poll object */
+    def Poll getPoll(String ID) {
 
         Poll.read(ID)
 

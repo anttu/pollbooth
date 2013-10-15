@@ -100,6 +100,20 @@
 			<div id="controller-list" role="navigation">
 				<h2>${poll?.description}</h2>
 
+
+                <g:each var="o" in="${poll?.options}">
+                    <li class="controller">${o.pollOption}</li>
+                </g:each>
+
+
+                <g:form name="modify" controller="poll" action="modify" >
+
+                                    <br />Add an answer option:
+                                   <input type="text" id="answer1" name="answer1" />
+                                   <input type="hidden" id="id" name="id" value="${poll.id}" />
+                                   <input type="submit" name="submit" value="lähetä"/>
+                </g:form>
+
 			</div>
 		</div>
 
