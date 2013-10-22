@@ -11,5 +11,4 @@ class PollOption {
     /* Possible answer for the poll */
     String pollOption
 
-
 }
