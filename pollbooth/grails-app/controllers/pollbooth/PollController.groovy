@@ -25,17 +25,19 @@ class PollController {
         model.put "poll" ,  pollService.getPoll(params?.id)
         model.put "polls" ,  pollService.activePolls
 
+        /* Check that the poll exists */
+        if( ! model.poll) response.sendError(404)
+
         render( view: "/poll/polldetails", model: model)
 
     }
 
     def modify() {
 
-        /* TODO Check that user owns the poll */
 
         def model =  [ : ]
 
-        pollService.addOption(params?.id , params?.answer1)
+        pollService.addOption(params?.id , params?.answer1 , getUserID())
 
         model.put "poll" ,  pollService.getPoll(params?.id)
         model.put "polls" ,  pollService.activePolls
@@ -65,10 +67,18 @@ class PollController {
 
     }
 
+    private String getUserID() {
+        getUserIDCookie().value
+    }
+
+    /**
+     *
+     * @return Cookie which has user ID. If user ID doesn't exists then generate one
+     */
     private Cookie getUserIDCookie() {
-        Cookie c = request.cookies.find()
+         request.cookies.find()
                 { it.name.equals(USER_ID_COOKIE_NAME) } ?:
-            new Cookie(USER_ID_COOKIE_NAME, session.id)
-        c
+                new Cookie(USER_ID_COOKIE_NAME, session.id)
+
     }
 }
