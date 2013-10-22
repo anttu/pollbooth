@@ -1,3 +1,4 @@
+
 class UrlMappings {
 
 	static mappings = {
@@ -7,7 +8,11 @@ class UrlMappings {
 			}
 		}
 
-		"/"(view:"/index")
-		"500"(view:'/error')
+
+
+		//"/"(view:"/index")
+        "/"(controller: "Poll" , action: "index" )
+		"500"(view:'/errors/500')
+        "404"(view:'/errors/404')
 	}
 }
