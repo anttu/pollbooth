@@ -12,11 +12,9 @@ class Poll {
     static hasMany = [options: PollOption]
 
     /* Owners ID */
-    String JESSIONID
+    String ownerID
     /* Description of the poll */
     String description
-
-
 
 
 }
