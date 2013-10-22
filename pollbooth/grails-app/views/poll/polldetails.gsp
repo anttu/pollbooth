@@ -82,35 +82,30 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Recent polls</h1>
-			<ul>
-                <g:each var="c" in="${polls?.sort { it.description } }">
-                     <li class="controller"><g:link controller="poll" action="details" id="${c.id}">${c.description}</g:link></li>
-                </g:each>
-			</ul>
-			<h1>Friends polls</h1>
-			<ul>
 
-			</ul>
-		</div>
+
+        <g:include view="/components/leftNavi.gsp" />
+
+
 		<div id="page-body" role="main">
-			<h1>Poll details</h1>
+			<h1>Modify your poll</h1>
 
 			<div id="controller-list" role="navigation">
 				<h2>${poll?.description}</h2>
 
 
-                <g:each var="o" in="${poll?.options}">
-                    <li class="controller">${o.pollOption}</li>
-                </g:each>
+                <g:each var="o" in="${poll?.options?.sort{ it.pollOption }}">
 
+
+                    <li class="controller">${o?.pollOption}</li>
+
+                </g:each>
 
                 <g:form name="modify" controller="poll" action="modify" >
 
                                     <br />Add an answer option:
                                    <input type="text" id="answer1" name="answer1" />
-                                   <input type="hidden" id="id" name="id" value="${poll.id}" />
+                                   <input type="hidden" id="id" name="id" value="${poll?.id}" />
                                    <input type="submit" name="submit" value="lähetä"/>
                 </g:form>
 

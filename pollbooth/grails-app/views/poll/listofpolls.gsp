@@ -82,19 +82,10 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Recent polls</h1>
-			<ul>
-                <g:each var="c" in="${polls?.sort { it.description } }">
-                     <li class="controller"><g:link controller="poll" action="details" id="${c.id}">${c.description}</g:link></li>
-                </g:each>
-			</ul>
-			<h1>Friends polls</h1>
-			<ul>
 
-			</ul>
-		</div>
-		<div id="page-body" role="main">
+        <g:include view="/components/leftNavi.gsp" />
+
+		<div id="ge-body" role="main">
 			<h1>List of active polls</h1>
 			<p>There are currently ${polls?.size()} polls active</p>
 
