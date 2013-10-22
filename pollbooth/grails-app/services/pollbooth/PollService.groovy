@@ -1,5 +1,7 @@
 package pollbooth
 
+import pollbooth.wrapper.PollWrapper
+
 class PollService {
 
     //private static transactional = false
@@ -14,7 +16,7 @@ class PollService {
 
         log.info("Creating poll for user ${JSESSIONID}")
 
-        def poll = new Poll(JESSIONID: JSESSIONID, description: description )
+        def poll = new Poll(ownerID: JSESSIONID, description: description )
 
         poll.save()
 
@@ -23,9 +25,11 @@ class PollService {
 
     }
 
-    def addOption(String ID, String option) {
+    def addOption(String ID, String option, String userID) {
 
         def poll = Poll.get(ID)
+
+        if (poll.ownerID != userID) throw new RuntimeException("User doesn't own the poll")
 
         /* TODO Check for duplicate options */
         poll.addToOptions(new PollOption(pollOption: option))
